@@ -1,0 +1,4 @@
+aiohttp
+motor
+disnake
+python-dotenv
