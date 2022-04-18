@@ -10,7 +10,7 @@ from json import JSONDecodeError
 
 from .env import (
     CHECK_DELAY, MONGO_HOST, MONGO_PORT, MONGO_DB,
-    CAPY_API_LINK, CAPY_LIFE_LINK
+    CAPY_API_LINK, CAPY_LIFE_LINK, INVITE_LINK
 )
 
 
@@ -125,6 +125,16 @@ class CapyCog(commands.Cog):
                      inter: disnake.ApplicationCommandInteraction) -> None:
         await inter.response.send_message(
             f"You can submit capybaras at <{CAPY_LIFE_LINK}>",
+            ephemeral=True
+        )
+
+    @capy.sub_command(
+        description="Invite Capy.life!",
+    )
+    async def invite(self,
+                     inter: disnake.ApplicationCommandInteraction) -> None:
+        await inter.response.send_message(
+            f"You can invite this bot with <{INVITE_LINK}>",
             ephemeral=True
         )
 
