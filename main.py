@@ -5,8 +5,6 @@ from capycord import CapyCog
 
 
 bot = commands.Bot(
-    test_guilds=[956885666334113822],
-    sync_commands_debug=True,
     intents=Intents(
         messages=True, guilds=True,
         typing=False, presences=False

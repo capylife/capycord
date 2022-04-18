@@ -32,7 +32,6 @@ class CapyCog(commands.Cog):
         self.__collection = self.__mongo[MONGO_DB]
 
         self.check_capy.start()
-
         return await super().cog_load()
 
     def cog_unload(self) -> None:
@@ -65,7 +64,8 @@ class CapyCog(commands.Cog):
 
         embed = disnake.Embed(
             title=f"Meet {name}!",
-            url=CAPY_LIFE_LINK
+            url=CAPY_LIFE_LINK,
+            color=0x332525
         )
         embed.set_image(image)
 
@@ -118,6 +118,16 @@ class CapyCog(commands.Cog):
     async def capy(self, inter: disnake.ApplicationCommandInteraction) -> None:
         pass
 
+    @capy.sub_command(
+        description="Submit a capybara!",
+    )
+    async def submit(self,
+                     inter: disnake.ApplicationCommandInteraction) -> None:
+        await inter.response.send_message(
+            f"You can submit capybaras at <{CAPY_LIFE_LINK}>",
+            ephemeral=True
+        )
+
     @commands.has_permissions(manage_guild=True)
     @capy.sub_command(
         description="Set channel to push Capybara's to daily",
@@ -131,7 +141,8 @@ class CapyCog(commands.Cog):
 
         if inter.guild_id != channel.guild.id:
             await inter.response.send_message(
-                "Must be a channel within the guild"
+                "Must be a channel within the guild",
+                ephemeral=True
             )
             return
 
@@ -145,7 +156,7 @@ class CapyCog(commands.Cog):
         await inter.response.send_message((
             f"A new capybara will be pushed to {channel.mention} "
             "daily!"
-        ))
+        ), ephemeral=True)
 
     @commands.has_permissions(manage_guild=True)
     @capy.sub_command(
@@ -161,7 +172,8 @@ class CapyCog(commands.Cog):
 
         if inter.guild_id != channel.guild.id:
             await inter.response.send_message(
-                "Must be a channel within the guild"
+                "Must be a channel within the guild",
+                ephemeral=True
             )
             return
 
@@ -172,7 +184,7 @@ class CapyCog(commands.Cog):
             await inter.response.send_message((
                 f"{channel.mention} isn't set to "
                 "receive any capybaras currently."
-            ))
+            ), ephemeral=True)
             return
 
         await self.__collection.channel.delete_many({
@@ -182,4 +194,4 @@ class CapyCog(commands.Cog):
         await inter.response.send_message((
             f"{channel.mention} will no longer "
             "receive daily capybaras."
-        ))
+        ), ephemeral=True)
