@@ -147,8 +147,6 @@ class CapyCog(commands.Cog):
             "daily!"
         ))
 
-        # Add logic to post lastest capy.
-
     @commands.has_permissions(manage_guild=True)
     @capy.sub_command(
         description="Remove channel from receiving daily capybaras",
