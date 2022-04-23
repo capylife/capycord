@@ -9,9 +9,6 @@ on:
 jobs:
   python:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./capycord
 
     steps:
       - uses: actions/checkout@v2.3.2
