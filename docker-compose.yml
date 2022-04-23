@@ -1,7 +1,7 @@
 version: '3'
 services:
   capycord:
-    container_name: capy_backend
+    container_name: capycord
     build:
       dockerfile: ./Dockerfile
       context: ./
@@ -39,6 +39,4 @@ networks:
 
 volumes:
   mongodbdata:
-    driver: local
-  capycorddata:
     driver: local
