@@ -1,13 +1,11 @@
 version: '3'
 services:
-  starlette:
+  capycord:
     container_name: capy_backend
     build:
       dockerfile: ./Dockerfile
       context: ./
     restart: unless-stopped
-    ports:
-      - "7777:80"
     environment:
       BOT_TOKEN: ""
 
