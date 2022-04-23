@@ -1,0 +1,46 @@
+version: '3'
+services:
+  starlette:
+    container_name: capy_backend
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    restart: unless-stopped
+    ports:
+      - "7777:80"
+    environment:
+      BOT_TOKEN: ""
+
+      CAPY_LIFE_LINK: "https://capy.life"
+      CAPY_API_LINK: "https://capy.life/api/"
+      INVITE_LINK: "https://capy.life/discord"
+
+      MONGO_IP: "capycord_mongodb"
+      MONGO_PORT: 27017
+      MONGO_DB: "capycord"
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+
+  mongodb:
+    image: mongo
+    container_name: capycord_mongodb
+    restart: unless-stopped
+    environment:
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /dev/null
+    volumes:
+      - mongodbdata:/data/db
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mongodbdata:
+    driver: local
+  capycorddata:
+    driver: local
